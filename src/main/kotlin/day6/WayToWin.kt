@@ -1,17 +1,17 @@
 package day6
 
 class WayToWin {
-    fun SolveThePuzzle(race:List<RaceMatrix>) : Int {
-        var result:Int = 1
+    fun SolveThePuzzle(race:List<RaceMatrix>) : ULong {
+        var result:ULong = 1u
         race.forEach {
-            result *= calculate(it.time,it.distance)
+            result *= calculate(it.time,it.distance, it.startingPoint)
         }
         return result
     }
-    private fun calculate(time:Int, distance:Int) : Int {
-        return (time-1 downTo 1 step 1).map {
+    private fun calculate(time:ULong, distance:ULong, startingPoint:ULong) : ULong {
+        return (time-startingPoint downTo startingPoint step 1).map {
             val travel = time - it
             ((travel * it))
-        }.filter { it > distance }.size
+        }.filter { it > distance }.size.toULong()
     }
 }

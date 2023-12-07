@@ -7,8 +7,8 @@ class WaytoWinTests {
 
     @Test
     fun calculateSingleRace1(){
-        var race = listOf(RaceMatrix(7,9))
-        val expected = 4
+        var race = listOf(RaceMatrix(7u,9u, 1u))
+        val expected:ULong = 4u
         val target = WayToWin()
         val actual = target.SolveThePuzzle(race)
         assertEquals(expected, actual)
@@ -16,8 +16,8 @@ class WaytoWinTests {
 
     @Test
     fun calculateSingleRace2(){
-        var race = listOf(RaceMatrix(15,40))
-        val expected = 8
+        var race = listOf(RaceMatrix(15u,40u, 1u))
+        val expected:ULong = 8u
         val target = WayToWin()
         val actual = target.SolveThePuzzle(race)
         assertEquals(expected, actual)
@@ -25,8 +25,8 @@ class WaytoWinTests {
 
     @Test
     fun calculateSingleRace3(){
-        var race = listOf(RaceMatrix(30,200))
-        val expected = 9
+        var race = listOf(RaceMatrix(30u,200u, 1u))
+        val expected:ULong = 9u
         val target = WayToWin()
         val actual = target.SolveThePuzzle(race)
         assertEquals(expected, actual)
@@ -34,8 +34,8 @@ class WaytoWinTests {
 
     @Test
     fun firstExample(){
-        var race = listOf(RaceMatrix(7,9),RaceMatrix(15,40),RaceMatrix(30,200))
-        val expected = 288
+        var race = listOf(RaceMatrix(7u,9u, 1u),RaceMatrix(15u,40u, 1u),RaceMatrix(30u,200u, 1u))
+        val expected:ULong = 288u
         val target = WayToWin()
         val actual = target.SolveThePuzzle(race)
         assertEquals(expected, actual)
@@ -43,8 +43,17 @@ class WaytoWinTests {
 
     @Test
     fun finalSolution(){
-        var race = listOf(RaceMatrix(47,400),RaceMatrix(98,1213),RaceMatrix(66,1011),RaceMatrix(98,1540))
-        val expected = 1660968
+        var race = listOf(RaceMatrix(47u,400u, 1u),RaceMatrix(98u,1213u, 1u),RaceMatrix(66u,1011u, 1u),RaceMatrix(98u,1540u, 1u))
+        val expected:ULong = 1660968u
+        val target = WayToWin()
+        val actual = target.SolveThePuzzle(race)
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun finalSolutionPartTwo(){
+        var race = listOf(RaceMatrix(71530u,940200u, 14u))
+        val expected:ULong = 71503u //wrong value : 71512u
         val target = WayToWin()
         val actual = target.SolveThePuzzle(race)
         assertEquals(expected, actual)
