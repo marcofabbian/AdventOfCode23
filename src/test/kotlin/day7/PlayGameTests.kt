@@ -12,15 +12,36 @@ class PlayGameTests {
         val bid:ULong = 765u
         val expectedResult:ULong = 765u
         val hand = createHand(input, bid)
-        val gameResult = PlayGame().calculateWin(listOf(hand))
+        val gameResult = PlayGame().calculateWin(listOf(hand).toTypedArray())
 
         assertEquals(expectedResult, gameResult)
+    }
 
+    @Test
+    fun `Test max of luck use case`(){
+        val input:String = "JJJJJ"
+        val bid:ULong = 765u
+        val expectedResult:ULong = 765u
+        val hand = createHand(input, bid)
+        val gameResult = PlayGame().calculateWin(listOf(hand).toTypedArray())
+
+        assertEquals(expectedResult, gameResult)
+    }
+
+    @Test
+    fun `Test 3J use case`(){
+        val input:String = "JJJQK"
+        val bid:ULong = 765u
+        val expectedResult:ULong = 765u
+        val hand = createHand(input, bid)
+        val gameResult = PlayGame().calculateWin(listOf(hand).toTypedArray())
+
+        assertEquals(expectedResult, gameResult)
     }
 
     @Test
     fun `Test multiple use case`(){
-        val expectedResult:ULong = 6440u
+        val expectedResult:ULong = 5905u
         val hands = mutableListOf<Hand>()
         hands.add(createHand("KTJJT", 220u))
         hands.add(createHand("KK677", 28u))
@@ -28,21 +49,23 @@ class PlayGameTests {
         hands.add(createHand("32T3K", 765u))
         hands.add(createHand("T55J5", 684u))
 
-        val gameResult = PlayGame().calculateWin(hands)
+        val gameResult = PlayGame().calculateWin(hands.toTypedArray())
 
         assertEquals(expectedResult, gameResult)
     }
 
     @Test
     fun `Test first part use case`(){
-        val expectedResult:ULong = 252052080u
+        val expectedResult:ULong = 252898370u
+            //253019563u
+            //252894314u wrong
         val hands = mutableListOf<Hand>()
         File("src/test/resources/testdata.csv").forEachLine {
             val raw = it.split(" ")
             hands.add(createHand(raw.first(), raw.last().toULong()))
         }
 
-        val gameResult = PlayGame().calculateWin(hands)
+        val gameResult = PlayGame().calculateWin(hands.toTypedArray())
 
         assertEquals(expectedResult, gameResult)
     }

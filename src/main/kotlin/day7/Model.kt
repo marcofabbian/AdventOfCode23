@@ -15,7 +15,7 @@ enum class Card(val weight:Int = 0) {
     A(13),
     K(12),
     Q(11),
-    J(10),
+    J(0),
     T(9),
     `9`(8),
     `8`(7),
@@ -41,14 +41,15 @@ class Hand(val c1:Card, val c2:Card, val c3:Card, val c4:Card, val c5:Card, val 
             add(c4)
             add(c5)
         }
-        var typeCalculation = Card.entries.map { singleCardToSearch ->
+        var typeCalculation = Card.entries.sortedByDescending { it.weight }.map { singleCardToSearch ->
             val appearance: Int = cards.filter {
                 (it == singleCardToSearch)
             }.size
 
             Pair(singleCardToSearch, appearance)
-        }.filter { it.second >= 1 }.sortedByDescending { it.second }
+        }.filter { it.second >= 1 }.sortedByDescending { it.second }.toMutableList()
 
+        typeCalculation.calculateJolly()
 
         when (typeCalculation.size) {
             1 -> handType= HandType.FiveOfAKind
@@ -66,8 +67,30 @@ class Hand(val c1:Card, val c2:Card, val c3:Card, val c4:Card, val c5:Card, val 
                     handType= HandType.TwoPair
             }
 
-            4 -> handType= HandType.OnePair
-            else -> handType= HandType.HighCard
+            4 -> {
+                handType= HandType.OnePair
+            }
+            else -> {
+                handType= HandType.HighCard
+            }
+        }
+    }
+
+    override fun toString(): String {
+        return c1.toString()+c2.toString()+c3.toString()+c4.toString()+c5.toString()
+    }
+
+    private fun MutableList<Pair<Card, Int>>.calculateJolly() {
+        val j = this.singleOrNull {
+            it.first == Card.J
+        } ?: return
+
+        when(this.size) {
+            1 -> return
+            else -> {
+                this.remove(j)
+                this[0] = Pair(this[0].first, (this[0].second + j.second))
+            }
         }
     }
 }
