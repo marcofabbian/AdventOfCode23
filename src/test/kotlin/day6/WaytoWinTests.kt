@@ -1,3 +1,5 @@
+package day6
+
 import day6.RaceMatrix
 import day6.WayToWin
 import org.junit.jupiter.api.Test
