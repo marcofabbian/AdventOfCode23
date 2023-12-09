@@ -7,10 +7,6 @@ class PlayGame {
         var result:ULong = 0u
         var orderedList = hands.sortedWith(getComparer())
 
-        //orderedList.forEach {
-        //    println(it.toString()+ " " + it.bid + " " + it.handType.toString())
-        //}
-
         orderedList.forEachIndexed {index, element ->
             result += (element.bid * (index.toULong() + 1u))
         }

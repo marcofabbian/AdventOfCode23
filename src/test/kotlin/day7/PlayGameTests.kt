@@ -60,7 +60,7 @@ class PlayGameTests {
             //253019563u
             //252894314u wrong
         val hands = mutableListOf<Hand>()
-        File("src/test/resources/testdata.csv").forEachLine {
+        File("src/test/resources/testdata_day7.csv").forEachLine {
             val raw = it.split(" ")
             hands.add(createHand(raw.first(), raw.last().toULong()))
         }
