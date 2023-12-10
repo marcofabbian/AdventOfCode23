@@ -22,16 +22,40 @@ class BrowseMapTests {
                     "ZZZ,ZZZ,ZZZ")
         var nodes = loadNodes(node)
 
-        val maps = Maps(ways, nodes)
-        val browser = BrowseMap(maps)
+        val browser = BrowseMap(ways, nodes)
         val result = browser.calculateSteps()
 
         assertEquals(expectedStepsNumber,result)
     }
 
     @Test
-    fun `Test fist part use case`(){
-        val expectedStepsNumber = 11911
+    fun `Test second use case`(){
+        val expectedStepsNumber = 6
+        val way = "LR"
+        var ways = loadWays(way)
+
+        val node =  arrayOf(
+            "11A,11B,XXX",
+            "11B,XXX,11Z",
+            "11Z,11B,XXX",
+            "22A,22B,XXX",
+            "22B,22C,22C",
+            "22C,22Z,22Z",
+            "22Z,22B,22B",
+            "XXX,XXX,XXX")
+        var nodes = loadNodes(node)
+
+        val browser = BrowseMap(ways, nodes)
+        val result = browser.calculateSteps()
+
+        assertEquals(expectedStepsNumber,result)
+    }
+
+    @Test
+    fun `Test fist & second part use case`(){
+        val expectedStepsNumber = 1
+            //21883
+            //11911
         var ways= mutableListOf<Way>()
         var nodes = mutableListOf<Node>()
 
@@ -45,9 +69,7 @@ class BrowseMapTests {
             }
         }
 
-        val maps = Maps(ways.toTypedArray(), nodes.toTypedArray())
-        val browser = BrowseMap(maps)
-
+        val browser = BrowseMap(ways.toTypedArray(), nodes.toTypedArray())
         val result = browser.calculateSteps()
 
         assertEquals(expectedStepsNumber,result)
