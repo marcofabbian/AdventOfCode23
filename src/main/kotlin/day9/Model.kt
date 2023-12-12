@@ -20,7 +20,7 @@ data class Matrix(val data:MutableList<MutableList<Long>>) {
         return this
     }
 
-    fun calculateExtraZero():Long {
+    fun calculateExtraZeroAtTheEnd():Long {
         var values = mutableListOf<Long>()
         val lastRow = data.size-1
         for(row:Int in lastRow downTo 0){
@@ -32,6 +32,25 @@ data class Matrix(val data:MutableList<MutableList<Long>>) {
                 else -> {
                     val previousElement = values.last()
                     val calculated = data[row][col] + previousElement
+                    values.add(calculated)
+                }
+            }
+        }
+        return values.last()
+    }
+
+    fun calculateExtraZeroAtTheBeginning():Long {
+        var values = mutableListOf<Long>()
+        val lastRow = data.size-1
+        for(row:Int in lastRow downTo 0){
+            val col = 0
+            when(row){
+                lastRow -> {
+                    values.add(0)
+                }
+                else -> {
+                    val previousElement = values.last()
+                    val calculated = data[row][col] - previousElement
                     values.add(calculated)
                 }
             }

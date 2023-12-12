@@ -3,6 +3,7 @@ package day8
 import org.junit.jupiter.api.Test
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class BrowseMapTests {
 
@@ -27,7 +28,6 @@ class BrowseMapTests {
 
         assertEquals(expectedStepsNumber,result)
     }
-
     @Test
     fun `Test second use case`(){
         val expectedStepsNumber = 6
@@ -46,11 +46,10 @@ class BrowseMapTests {
         var nodes = loadNodes(node)
 
         val browser = BrowseMap(ways, nodes)
-        val result = browser.calculateSteps()
+        val result = browser.calculateSteps(true)
 
         assertEquals(expectedStepsNumber,result)
     }
-
     @Test
     fun `Test fist & second part use case`(){
         val expectedStepsNumber = 1
@@ -69,8 +68,10 @@ class BrowseMapTests {
             }
         }
 
+        assertTrue { false }
+
         val browser = BrowseMap(ways.toTypedArray(), nodes.toTypedArray())
-        val result = browser.calculateSteps()
+        val result = browser.calculateSteps(true)
 
         assertEquals(expectedStepsNumber,result)
     }
@@ -82,12 +83,10 @@ class BrowseMapTests {
             (Node(el[0].toString(), el[1].toString(), el[2].toString()))
         }.toTypedArray()
     }
-
     private fun loadNode(line:String): Node {
         val el = line.split(",")
         return Node(el[0].toString(), el[1].toString(), el[2].toString())
     }
-
     private fun loadWays(way: String): Array<Way> {
         return (way.split("").filter { it != "" }).map {
 

@@ -2,13 +2,16 @@ package day9
 
 class SandReport(val matrix:Array<LongArray>) {
 
-    fun calculateNextZeroValue():Long {
-        var result:Long = 0
+    fun calculateExtraZero():Pair<Long,Long> {
+        var endResult:Long = 0
+        var startResult:Long = 0
         matrix.forEach {
-            result += Matrix(mutableListOf(it.toMutableList()))
-                .createMatrix()
-                .calculateExtraZero()
+            val calculatedMatrix = Matrix(mutableListOf(it.toMutableList()))
+            .createMatrix()
+            endResult += calculatedMatrix.calculateExtraZeroAtTheEnd()
+            startResult += calculatedMatrix.calculateExtraZeroAtTheBeginning()
         }
-        return result
+        return Pair(startResult,endResult)
     }
+
 }
